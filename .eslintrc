@@ -1,0 +1,55 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 11,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules": {
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "no-unused-vars": "warn",
+    "no-console": "warn",
+    "arrow-body-style": "off",
+    "consistent-return": "off",
+    "no-else-return": "off",
+    "global-require": "off",
+    "new-cap": "off",
+    "arrow-parens": "off",
+    "prefer-destructuring": "warn",
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
+    "import/prefer-default-export": "off",
+    "no-param-reassign": ["error", { "props": false }]
+  },
+  "env": {
+    "browser": true,
+    "amd": true,
+    "node": true,
+    "jest": true,
+    "es6": true
+  },
+  "overrides": [
+    {
+      // enable the rule specifically for TypeScript files
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off"
+      }
+    }
+  ],
+  "ignorePatterns": ["src/utils/third-party/react-auth0-wrapper.js"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}
