@@ -17,7 +17,6 @@ describe('Items Component Render', () => {
 
     const container = screen.getByTestId('container-item');
     expect(container.childElementCount).toBe(4);
-    // eslint-disable-next-line prefer-destructuring
     const [firstButton] = screen.getAllByRole('button');
     await waitFor(() => {
       fireEvent.click(firstButton);

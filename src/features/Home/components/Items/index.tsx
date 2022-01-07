@@ -7,7 +7,11 @@ export type ItemsProps = {
   list: IItem[];
 };
 
-export const Items: React.FC<ItemsProps> = ({ list: arr = [] }) => {
+export type ItemWrapperProps = {
+  color: string;
+};
+
+export const Items: React.FC<ItemsProps> = ({ list: arr }) => {
   const dispatch = useAppDispatch();
   const cartList: ICartItem[] = useAppSelector(getCart);
   const [list, setList] = useState(arr);
@@ -21,8 +25,8 @@ export const Items: React.FC<ItemsProps> = ({ list: arr = [] }) => {
     if (index === -1) {
       dispatch(updateCart([...cartList, { ...item, quantity: 1 }]));
     } else {
-      const tempNewCart = cartList.map((i) =>
-        i.id == item.id ? { ...i, quantity: i.quantity + 1 } : i
+      const tempNewCart = cartList.map((element) =>
+        element.id == item.id ? { ...element, quantity: element.quantity + 1 } : element
       );
       dispatch(updateCart(tempNewCart));
     }
@@ -31,7 +35,7 @@ export const Items: React.FC<ItemsProps> = ({ list: arr = [] }) => {
   return (
     <ContainerStyled data-testid="container-item">
       {list.map((item, i) => (
-        <ItemWrapperStyled key={i}>
+        <ItemWrapperStyled key={i} color="white">
           <ItemDetailStyled>
             {item.name} (${item.price})
           </ItemDetailStyled>
