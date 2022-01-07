@@ -9,11 +9,13 @@ describe('Render Home', () => {
   test('Should display Home', async () => {
     const fetchItems = fetched as jest.MockedFunction<typeof fetched>;
     fetchItems.mockResolvedValue(cartItems);
+
     const component = <Home />;
     render(component);
+
     const loading = screen.getByText('Loading...');
-    const loadingId = screen.getByTestId('el_loading');
-    expect(loadingId).toBeInTheDocument();
+    expect(loading).toBeInTheDocument();
+
     await waitFor(() => {
       expect(loading).not.toBeInTheDocument();
       const tienda = screen.getByText('Tienda');

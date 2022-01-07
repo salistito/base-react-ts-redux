@@ -6,30 +6,31 @@ import * as cartSlice from '../../../../../redux/cartSlice';
 describe('Items Component Render', () => {
   test('Should display an empty view', () => {
     render(<Items list={[]} />);
-    const container = screen.getByTestId('container-item');
-    expect(container.childElementCount).toBe(0);
+    const itemsComponent = screen.getByTestId('container-item');
+    expect(itemsComponent.childElementCount).toBe(0);
   });
 
-  test('Should add an Item toCart', async () => {
+  test('Should display items', () => {
+    render(<Items list={cartItems} />);
+    const itemsComponent = screen.getByTestId('container-item');
+    expect(itemsComponent.childElementCount).toBeGreaterThan(0);
+  });
+
+  test('Should add an Item to Cart', async () => {
     const updateCart = jest.spyOn(cartSlice, 'updateCart');
 
     render(<Items list={cartItems} />);
-
-    const container = screen.getByTestId('container-item');
-    expect(container.childElementCount).toBe(4);
     const [firstButton] = screen.getAllByRole('button');
-    await waitFor(() => {
-      fireEvent.click(firstButton);
-    });
 
-    const first = [{ id: 1, name: 'ítem1', price: 100, quantity: 1 }];
-    expect(updateCart).toHaveBeenCalledWith(first);
+    fireEvent.click(firstButton);
 
-    await waitFor(() => {
-      fireEvent.click(firstButton);
-    });
-    const second = [{ id: 1, name: 'ítem1', price: 100, quantity: 2 }];
-    expect(updateCart).toHaveBeenCalledWith(second);
-    expect(updateCart).toHaveBeenCalledTimes(2);
+    const firstItem = [{ ...cartItems[0], quantity: 1 }];
+    expect(updateCart).toHaveBeenCalledWith(firstItem);
+    expect(updateCart).toHaveBeenCalled();
+
+    fireEvent.click(firstButton);
+
+    const firstItem2 = [{ ...cartItems[0], quantity: 2 }];
+    expect(updateCart).toHaveBeenCalledWith(firstItem2);
   });
 });
