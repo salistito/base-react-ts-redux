@@ -38,7 +38,7 @@ export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    updateCart: (state, action: PayloadAction<ICartState['cartList']>) => { // Actualiza el carrito (recibe un array con los datos actualizado del carro -> items del carro)
+    updateCart: (state, action: PayloadAction<ICartState['cartList']>) => { // Actualiza el carrito (recibe un array con los datos actualizados del carro -> items del carro)
       state.cartList = action.payload;
     },
   },

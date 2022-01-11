@@ -5,7 +5,7 @@ import { CartItemStyled, CartItemWrapperStyled, CartWrapperStyled, DeleteIcon } 
 
 export const Cart = () => {
   const dispatch = useAppDispatch();
-  const cartItems = useAppSelector(getCart);
+  const cartItems = useAppSelector(getCart); // Obtiene el cart del store en cartSlice (getCart retorna la cartList)
 
   const getTotal = (list) => {
     const total = list.reduce((current, next) => current + next.price * next.quantity, 0); // array.reduce(function(total, currentValue, currentIndex, arr), initialValue)

@@ -7,6 +7,14 @@ const delay = 1000; //1s
 // Promesas representa un resultado eventual de una operación asincrónica (en este caso recuperar items)
 // Las promesas pueden estar en 3 estados pending, fulfilled y rejected
 // Sintaxis: new Promise( /* ejecutor */ function(resolver, rechazar) { ... } );
+export const fetchItems = () => {
+  return new Promise<IItem[]>((resolve) => {
+    setTimeout(() => {
+      resolve(cartItems);
+    }, delay);
+  });
+};
+
 /*
 let miPrimeraPromise = new Promise((resolve, reject) => {
   // Llamamos a resolve(...) cuando lo que estabamos haciendo finaliza con éxito, y reject(...) cuando falla.
@@ -17,10 +25,3 @@ let miPrimeraPromise = new Promise((resolve, reject) => {
   }, 250);
 });
 */
-export const fetchItems = () => {
-  return new Promise<IItem[]>((resolve) => {
-    setTimeout(() => {
-      resolve(cartItems);
-    }, delay);
-  });
-};
