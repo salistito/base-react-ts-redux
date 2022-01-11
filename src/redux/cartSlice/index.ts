@@ -16,22 +16,29 @@ export type ICartState = {
   cartList: ICartItem[];
 };
 
+// Definition of initial value
 export const initialState: ICartState = {
   status: 'idle',
   items: [],
   cartList: [],
 };
 
+/*
+Cuando es necesario crear una acción en el reducer de carácter asíncrono, entra a funcionar la integración con Redux-Thunk.
+Estas acción manejan 3 estados: pending, fulfilled y rejected.
+Para su creación se utiliza el método createAsyncThunk y se integran al reducer por medio de extraReducers.
+*/
 export const fetchItemsAsync = createAsyncThunk('cart/fetchItems', async () => {
   const response = await fetchItems();
   return response;
 });
 
+// Slice creation
 export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    updateCart: (state, action: PayloadAction<ICartState['cartList']>) => {
+    updateCart: (state, action: PayloadAction<ICartState['cartList']>) => { // Actualiza el carrito (recibe un array con los datos actualizado del carro -> items del carro)
       state.cartList = action.payload;
     },
   },
@@ -51,8 +58,10 @@ export const cartSlice = createSlice({
   },
 });
 
+// Export of actions
 export const { updateCart } = cartSlice.actions;
 
+// Definition and export of selectors
 export const getItems = (state: RootState) => state.cart.items;
 export const getItemsStatus = (state: RootState) => state.cart.status;
 export const getCart = (state: RootState) => state.cart.cartList;

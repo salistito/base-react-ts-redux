@@ -12,8 +12,7 @@ describe('Render Home', () => {
     const component = <Home />;
     render(component);
     const loading = screen.getByText('Loading...');
-    const loadingId = screen.getByTestId('el_loading');
-    expect(loadingId).toBeInTheDocument();
+    expect(loading).toBeInTheDocument();
     await waitFor(() => {
       expect(loading).not.toBeInTheDocument();
       const tienda = screen.getByText('Tienda');
