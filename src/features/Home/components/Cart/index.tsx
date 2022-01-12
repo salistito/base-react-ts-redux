@@ -8,7 +8,7 @@ export const Cart = () => {
   const cartItems = useAppSelector(getCart); // Obtiene el cart del store en cartSlice (getCart retorna la cartList)
 
   const getTotal = (list) => {
-    const total = list.reduce((current, next) => current + next.price * next.quantity, 0); // array.reduce(function(total, currentValue, currentIndex, arr), initialValue)
+    const total = list.reduce((current: number, next: ICartItem) => current + next.price * next.quantity, 0); // array.reduce(function(total, currentValue, currentIndex, arr), initialValue)
     return total;
   };
 

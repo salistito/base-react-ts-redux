@@ -18,11 +18,12 @@ export type ItemWrapperProps = {
 export const Items: React.FC<ItemsProps> = ({ list: arr }) => {
   const dispatch = useAppDispatch();
   const cartList: ICartItem[] = useAppSelector(getCart); // Obtiene el cart del store en cartSlice (getCart retorna la cartList)
-  const [list, setList] = useState(arr);
+  const [list, setList] = useState(arr); // useState es un Hook que hace que la variable sea reactiva (dinámica)
+  //    value, fuction than change the value
 
-  useEffect(() => {
-    setList(arr);
-  }, [arr]);
+  useEffect(() => { // sintaxis: useEffect(effect, deps?)
+    setList(arr); // effect: función que se ejecutará en cada renderizado
+  }, [arr]); // deps: si está presente, effect solo se ejecutará si deps cambia (las dependencias pueden ser un solo valor o un array)
 
   const onAddItemToCart = (item: IItem) => {
     const index = cartList.findIndex((m) => m.id === item.id);
