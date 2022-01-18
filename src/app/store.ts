@@ -13,6 +13,7 @@ export const store = configureStore({
   reducer: rootReducer,
 });
 
+// AppDispatch y RootState siempre se crean
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 export type InitialRootState = RecursivePartial<RootState>;
